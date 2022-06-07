@@ -26,7 +26,61 @@ $(document).ready(function() {
       $("body").width() * Math.random(),
       Math.random() * 1000
     );
+
+    console.log(dancer);
+    window.dancers.push(dancer);
     $('body').append(dancer.$node);
+
+    var storage = [];
+    for (var i = 0; i < window.dancers.length; i++) {
+      var dancerLeft = window.dancers[i].left;
+      var dancerTop = window.dancers[i].top;
+      for (j = 0; j < window.dancers.length; j++) {
+        var secondDancerLeft = window.dancers[j].left;
+        var secondDancerTop = window.dancers[j].top;
+        var distance = Math.sqrt(Math.pow(secondDancerLeft - dancerLeft, 2) + Math.pow(secondDancerLeft - dancerLeft, 2));
+        if (distance > 0 && distance < 155) {
+
+          var flashYellow = function() {
+
+            window.dancers[i].$node.css({'border-color': 'yellow'});
+            window.dancers[j].$node.css({'border-color': 'yellow'})
+            window.dancers[i].$node.toggle();
+            window.dancers[j].$node.toggle();
+
+
+          };
+
+
+          var styleSettings = {
+            'border-color': 'red'
+          };
+
+          window.dancers[i].$node.animate(styleSettings, 1000, flashYellow);
+
+        }
+      }
+    }
+
   });
+
+  $('.addLineUpButton').on('click', function(event) {
+
+    for (var i = 0; i < window.dancers.length; i++) {
+      window.dancers[i].lineUp();
+    }
+
+  });
+
+
+  $('body').on('mouseover', '.dancer', function() {
+
+    for (var i = 0; i < window.dancers.length; i++) {
+      window.dancers[i].change();
+    }
+
+  });
+
+
 });
 

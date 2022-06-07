@@ -34,3 +34,24 @@ var makeBlinkyDancer = function(top, left, timeBetweenSteps) {
    this.$node.toggle();
 
  };
+
+ makeBlinkyDancer.prototype.lineUp = function() {
+
+  this.$node.css({'left': '0'});
+
+};
+
+makeBlinkyDancer.prototype.change = function() {
+
+  var borderColor = 'purple';
+  var borderSize = '20px';
+
+  var styleSettings = {
+    'border-color': borderColor,
+    'border-width': borderSize,
+    'border-radius': '100px'
+  };
+
+  this.$node.css(styleSettings);
+
+ };
